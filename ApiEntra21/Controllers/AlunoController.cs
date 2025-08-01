@@ -30,5 +30,63 @@ namespace ApiEntra21.Controllers
                 return BadRequest();
             }
         }
+        [HttpPost("InserirDadosAluno")]
+        public IActionResult InserirDadosAluno([FromBody] Aluno aluno)
+        {
+            try 
+            {
+                _alunoApplication.InserirAluno(aluno);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPatch("AlterarDadosAluno")]
+        public IActionResult AlterarDadosAluno([FromBody] Aluno aluno)
+        {
+            try
+            {
+                _alunoApplication.AlterarAluno(aluno);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest();
+            }
+        }
+
+        [HttpPut("AlterarTotalDadosAluno")]
+        public IActionResult AlterarTotalDadosAluno([FromBody] Aluno aluno)
+        {
+            try
+            {
+                _alunoApplication.AlterarAluno(aluno);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest();
+            }
+        }
+
+        [HttpDelete("ExcluirDadosAluno/{id}")]
+        public IActionResult ExcluirDadosAluno(int id)
+        {
+            try
+            {
+                _alunoApplication.ExcluirAluno(id);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest();
+            }
+        }
     }
 }

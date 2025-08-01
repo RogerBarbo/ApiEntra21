@@ -17,5 +17,24 @@ namespace Modelo.Application
         {
             return _alunoRepositorio.BuscarId(id);
         }
+
+        public void InserirAluno(Aluno aluno)
+        {
+            _alunoRepositorio.InserirAluno(aluno);
+        }
+        
+        public void AlterarAluno(Aluno aluno)
+        {
+            _alunoRepositorio.AlterarAluno(aluno);
+        }
+        public void AlterarTotalAluno(Aluno aluno)
+        {
+            _alunoRepositorio.AlterarTotalAluno(aluno);
+        }
+
+        public void ExcluirAluno(int id)
+        {
+            _alunoRepositorio.ExcluirAluno(id);
+        }
     }
 }

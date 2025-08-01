@@ -1,4 +1,5 @@
-﻿using Modelo.Domain;
+﻿using System.Security.Cryptography;
+using Modelo.Domain;
 using Modelo.Infra.Repositorio.Interfaces;
 
 namespace Modelo.Infra.Repositorio
@@ -15,6 +16,29 @@ namespace Modelo.Infra.Repositorio
         public Aluno BuscarId(int id)
         {
             return _bancoContexto.Aluno.FirstOrDefault(x => x.Id == id);
+        }
+
+        public void InserirAluno(Aluno aluno)
+        {
+            _bancoContexto.Aluno.Add(aluno);
+            _bancoContexto.SaveChanges();
+        }
+
+        public void AlterarAluno(Aluno aluno)
+        {
+            _bancoContexto.Aluno.Update(aluno);
+            _bancoContexto.SaveChanges();
+        }
+        public void AlterarTotalAluno(Aluno aluno)
+        {
+            _bancoContexto.Aluno.Update(aluno);
+            _bancoContexto.SaveChanges();
+        }
+        public void ExcluirAluno(int id)
+        {
+            var aluno = BuscarId(id);
+            _bancoContexto.Aluno.Remove(aluno);
+            _bancoContexto.SaveChanges();
         }
     }
 }
