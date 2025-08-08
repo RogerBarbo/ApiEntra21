@@ -18,28 +18,41 @@ namespace ApiEntra21.Controllers
         [HttpGet("BuscarDadosAluno/{id}")]
         public IActionResult BuscarDadosAluno(int id)
         {
+            Retorno<Aluno> retorno = new(null);
             try
             {
                 var aluno = _alunoApplication.BuscarAluno(id);
 
-                return Ok(aluno);
+                if (aluno != null)
+                {
+                    retorno.CarregaRetorno(aluno, true, "Consulta realizada com sucesso", 200);
+                }
+                else
+                {
+                    retorno.CarregaRetorno(aluno, false, $"Aluno com id {id} não foi encontrado", 204);
+                }
+
+                    return Ok(retorno);
             }
             catch (Exception e)
             {
-
-                return BadRequest();
+                retorno.CarregaRetorno(false, e.Message, 400);
+                return BadRequest(retorno);
             }
         }
         [HttpPost("InserirDadosAluno")]
         public IActionResult InserirDadosAluno([FromBody] Aluno aluno)
         {
+            Retorno retorno = new();
             try 
             {
-                _alunoApplication.InserirAluno(aluno);
-                return Ok();
+                var mensagem = _alunoApplication.InserirAluno(aluno);
+                retorno.CarregaRetorno(true, mensagem, 200);
+                return Ok(retorno);
             }
             catch (Exception e)
             {
+                retorno.CarregaRetorno(false, e.Message, 400);
                 return BadRequest();
             }
         }
